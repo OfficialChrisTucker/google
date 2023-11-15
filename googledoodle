@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .input-group {
+            margin-top: 20px;
+        }
+
+        .input-group input {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        .input-group button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number</h1>
+    <div class="container">
+        <p>Guess a number between 1 and 100:</p>
+        <div class="input-group">
+            <input type="number" id="guessInput" min="1" max="100" required>
+            <button onclick="checkGuess()">Guess</button>
+        </div>
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var result = document.getElementById("result");
+
+        function checkGuess() {
+            var guessInput = document.getElementById("guessInput");
+            var guess = parseInt(guessInput.value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                result.textContent = "Please enter a valid number between 1 and 100.";
+                result.style.color = "red";
+            } else if (guess === randomNumber) {
+                result.textContent = "Congratulations! You guessed the correct number.";
+                result.style.color = "green";
+                guessInput.disabled = true;
+            } else if (guess < randomNumber) {
+                result.textContent = "Too low! Try again.";
+                result.style.color = "red";
+            } else {
+                result.textContent = "Too high! Try again.";
+                result.style.color = "red";
+            }
+
+            guessInput.value = "";
+            guessInput.focus();
+        }
+    </script>
+</body>
+</html>
